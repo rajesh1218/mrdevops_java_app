@@ -18,6 +18,13 @@ agent any
                 }
             }
         }
+        stage ('Intergartion test maven'){
+            steps {
+                script{
+                    mvnIntegrationTest()
+                }
+            }
+        }
     }
 }
     
