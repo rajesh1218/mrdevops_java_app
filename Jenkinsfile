@@ -11,6 +11,13 @@ agent any
             )
             }
         }
+        stage ('unit test maven'){
+            steps {
+                script{
+                    mvnTest()
+                }
+            }
+        }
     }
 }
     
