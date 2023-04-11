@@ -31,12 +31,21 @@ pipeline{
                 }
             }
         }
-        stage ('Static code analysis: Sonar'){
+        stage ('Static code analysis: SonarQube'){
         when { expression { params.action == 'create'} }    
             steps {
                 script{
                     def SonarQubecredentialsId = 'sonar-api'
-                   statiCodeAnalysis(SonarQubecredentialsId)
+                    statiCodeAnalysis(SonarQubecredentialsId)
+                }
+            }
+        }
+        stage ('Quality Gate Status Check: SonarQube'){
+        when { expression { params.action == 'create'} }    
+            steps {
+                script{
+                    def SonarQubecredentialsId = 'sonar-api'
+                    QualityGateStatus(SonarQubecredentialsId)
                 }
             }
         }
