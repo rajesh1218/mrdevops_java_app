@@ -6,7 +6,7 @@ pipeline{
       choice (name: 'action', choices: 'create\ndelete', description: 'create/Destroy')
       string (name: 'ImageName', description: 'name of the dockerfile', defaultValue: 'javapp')
       string (name: 'ImageTag', description: 'tag of the dockerfile', defaultValue: 'v1')
-      string (name: 'AppName', description: 'name of the Application', defaultValue: 'javapp')
+      string (name: 'dockerHubUser', description: 'name of the dockeruser', defaultValue: 'rajeshjallu')
    }
    stages {
         stage ('Git Checkout') {
