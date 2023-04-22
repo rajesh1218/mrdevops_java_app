@@ -34,6 +34,15 @@ pipeline{
                 }
             }
         }
+        stage ('Static code analysis: SonarQube'){
+        when { expression { params.action == 'create'} }    
+            steps {
+                script{
+                    def SonarQubecredentialsId = 'sonar-api'
+                    statiCodeAnalysis(SonarQubecredentialsId)
+                }
+            }
+        }
         stage ('Build maven: maven'){
         when { expression { params.action == 'create'} }    
             steps {
@@ -50,5 +59,6 @@ pipeline{
                 }
             }
         }
+
     }
 }
