@@ -42,11 +42,19 @@ pipeline{
                 }
             }
         }
-        stage ('Docker image: maven'){
+        stage ('Docker image: Build'){
         when { expression { params.action == 'create'} }    
             steps {
                 script{
                     dockerBuild("${params.ImageName}","${params.ImageTag}","${params.dockerHubUser}")
+                }
+            }
+        }
+        stage ('Docker image Scan: Trivy'){
+        when { expression { params.action == 'create'} }    
+            steps {
+                script{
+                    dockerImageScan("${params.ImageName}","${params.ImageTag}","${params.dockerHubUser}")
                 }
             }
         }
